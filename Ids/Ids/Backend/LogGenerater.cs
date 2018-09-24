@@ -4,7 +4,6 @@ namespace Backend
 {
     public class LogGenerater
     {
-        StreamWriter writer;
         /*
          * This method generates the log file on the basis of the Data passed.
          * @param:Data.
@@ -12,14 +11,18 @@ namespace Backend
          */ 
         public void GenerateLog(string data)
         {
-            try
+            using (StreamWriter writer = new StreamWriter("C:\\Users\\Raju Methwani\\Desktop\\log.txt", true))
             {
-                writer = new StreamWriter("C:\\Users\\Raju Methwani\\Desktop\\log.txt");
-                writer.WriteLine(data);
-            }
-            catch (Exception e)
-            {
-                writer.WriteLine("Error" + e);
+                try
+                {
+                    writer.WriteLine(data);
+                    Console.WriteLine("From LogGenerater:" + data);
+                }
+                catch (Exception e)
+                {
+                    Console.WriteLine(e);
+                    writer.WriteLine("Error" + e);
+                }
             }
         }
     }

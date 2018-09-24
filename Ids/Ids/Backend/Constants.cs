@@ -11,7 +11,7 @@ namespace Backend
             }
             set
             {
-                defaultpath = path;
+                defaultpath = value;
             }
         }
     }

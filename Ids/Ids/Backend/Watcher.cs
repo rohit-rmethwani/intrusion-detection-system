@@ -6,8 +6,8 @@ namespace Backend
 {
     public class Watcher
     {
-        private FileSystemWatcher watcher = new FileSystemWatcher();
-        private static LogGenerater log = new LogGenerater();
+        private FileSystemWatcher watcher;
+        private LogGenerater log;
         private string path;
         public string Path
         {
@@ -17,17 +17,23 @@ namespace Backend
             }
             set
             {
-                if (value == null)
-                {
-                    Console.WriteLine("Please enter the correct path!");
-                }
-                else
-                {
-                    path = value;
-                }
+                path = value;
             }
         }
-
+        public LogGenerater Log
+        {
+            get
+            {
+                return log;
+            }
+        }
+        public Watcher()
+        {
+            watcher = new FileSystemWatcher();
+            log = new LogGenerater();
+            InitializePath();
+            InitializeEvents();
+        }
         /*
          *This method starts the FileWatcher. 
          * @param: Nothing.
@@ -77,42 +83,26 @@ namespace Backend
         }
 
         // Define the event handlers.
-        private static void OnFileChanged(object source, FileSystemEventArgs e)
+        private void OnFileChanged(object source, FileSystemEventArgs e)
         {
             
             if (e.ChangeType == WatcherChangeTypes.Created)
             {
-                log.GenerateLog("File created: " + e.FullPath + " by " + Environment.UserName);
-                Console.WriteLine("File created: " + e.FullPath + " by " + Environment.UserName);
-
+               log.GenerateLog("File created: " + e.FullPath + " by " + Environment.UserName +" on " + DateTime.Now);
             }
             else if (e.ChangeType == WatcherChangeTypes.Changed)
             {
-                log.GenerateLog("File changed: " + e.FullPath + " by " + Environment.UserName);
-                Console.WriteLine("File Changed: " + e.FullPath + " by " + Environment.UserName);
-                Console.WriteLine("Last Accessed time:" + DateTime.Now + " by " + Environment.UserName);
+                log.GenerateLog("File changed: " + e.FullPath + " by " + Environment.UserName + " on " + DateTime.Now);
             }
             else
             {
-                log.GenerateLog("File: " + e.FullPath + " " + e.ChangeType + " by " + Environment.UserName);
-                Console.WriteLine("File: " + e.FullPath + " " + e.ChangeType + " by " + Environment.UserName);
+                log.GenerateLog("File: " + e.FullPath + " " + e.ChangeType + " by " + Environment.UserName + " on " + DateTime.Now);
             }
         }
 
-        private static void OnFileRenamed(object source, RenamedEventArgs e)
+        private void OnFileRenamed(object source, RenamedEventArgs e)
         {
-            log.GenerateLog("File: {0} renamed to {1}", e.OldFullPath, e.FullPath + " by " + Environment.UserName);
-            Console.WriteLine("File: {0} renamed to {1}", e.OldFullPath, e.FullPath + " by " + Environment.UserName);
-        }
-
-        [PermissionSet(SecurityAction.Demand, Name = "FullTrust")]
-        public static void Main()
-        {
-            Watcher obj = new Watcher();
-            obj.InitializePath();
-            obj.InitializeEvents();
-            obj.StartWatcher();
-            while (Console.ReadLine() != "q") ;
+            log.GenerateLog("File:"+ e.OldFullPath+" renamed to" + e.FullPath + " by " + Environment.UserName + " on " + DateTime.Now);
         }
     }
 }
