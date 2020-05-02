@@ -1,9 +1,0 @@
-D:\intrusion-detection-system\Ids\Ids\bin\Debug\Ids.exe.config
-D:\intrusion-detection-system\Ids\Ids\bin\Debug\Ids.exe
-D:\intrusion-detection-system\Ids\Ids\bin\Debug\Ids.pdb
-D:\intrusion-detection-system\Ids\Ids\obj\Debug\Ids.csprojAssemblyReference.cache
-D:\intrusion-detection-system\Ids\Ids\obj\Debug\Ids.Properties.Resources.resources
-D:\intrusion-detection-system\Ids\Ids\obj\Debug\Ids.csproj.GenerateResource.cache
-D:\intrusion-detection-system\Ids\Ids\obj\Debug\Ids.csproj.CoreCompileInputs.cache
-D:\intrusion-detection-system\Ids\Ids\obj\Debug\Ids.exe
-D:\intrusion-detection-system\Ids\Ids\obj\Debug\Ids.pdb
